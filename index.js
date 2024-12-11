@@ -1,11 +1,15 @@
-const express = require('express')
-const app = express()
-const port = 3000
+const express = require('express');
+require('dotenv').config();
+const app = express();
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
+
+const port = process.env.DEV_APP_PORT || 3055;
+
+const server = app.listen(port, () => {
+    console.log(`Ứng dụng Ecommerce với port ${port}`);
 })
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-})
+process.on('SIGINT', () => {
+    server.close( () => console.log('Thoát ứng dụng Ecommerce'));
+    server.exit(0);
+});
