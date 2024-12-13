@@ -18,8 +18,8 @@ module.exports.createPairToken = async (payload, publicKey, privateKey) => {
         });
 
         // Verify
-        const payload = await JWT.verify(accessToken, publicKey);
-        console.log('JWT verify::', payload);
+        const payloadVerify = await JWT.verify(accessToken, publicKey);
+        console.log('JWT verify::', payloadVerify);
 
         return { accessToken, refreshToken };
     }

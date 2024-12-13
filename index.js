@@ -3,7 +3,7 @@ const express = require('express');
 require('dotenv').config();
 
 // require route
-const v1Route = require('./v1/routes/index.js');
+const v1Route = require('./v1/routes/index.route.js');
 // const v2Route = require('./v2/routes/index.js');
 
 // require database
