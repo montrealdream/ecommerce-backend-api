@@ -1,4 +1,8 @@
+// require package
 const express = require('express');
+
+// require middlware
+const asyncHandler = require('../middleware/handleError.middleware');
 
 // init router
 const router = express.Router();
@@ -9,7 +13,7 @@ const shopController = require('../controllers/shop.controller');
 // use
 router.post(
     '/signup',
-    shopController.signUp
+    asyncHandler(shopController.signUp)
 );
 
 // export

@@ -5,6 +5,7 @@ require('dotenv').config();
 // require route
 const v1Route = require('./v1/routes/index.route.js');
 // const v2Route = require('./v2/routes/index.js');
+const v1ErrorRoute = require('./v1/routes/error.route.js');
 
 // require database
 const database = require('./databases/mongo.database');
@@ -26,6 +27,9 @@ database.connect();
 // init route
 v1Route(app);
 // v2Route(app);
+
+// handling error
+v1ErrorRoute(app);
 
 // server
 const server = app.listen(port, () => {

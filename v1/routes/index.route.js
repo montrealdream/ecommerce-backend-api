@@ -1,10 +1,12 @@
+// require router
 const shopRouter = require('./shop.route');
 
+// require middleware
 const apiKeyMiddleware = require('../middleware/apiKey.middleware');
 
 module.exports = (app) => {
     const version = '/api/v1'; // version 1
-
+    
     // Kiểm tra API KEY
     app.use(apiKeyMiddleware.requiredApiKey);
 
@@ -13,5 +15,4 @@ module.exports = (app) => {
 
     // Route
     app.use(version + `/shop`, shopRouter);
-
 }
