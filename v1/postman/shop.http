@@ -1,0 +1,11 @@
+@url_dev=http://localhost:3000/api/v1/shop
+
+# đăng ký
+POST {{url_dev}}/signup
+Content-Type: application/json
+
+{
+    "name": "Giang Trường Shop",
+    "email": "giangtruong100702@gmail.com",
+    "password": "matkhauSieuManh"
+}
