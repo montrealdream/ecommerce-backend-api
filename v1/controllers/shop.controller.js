@@ -1,11 +1,21 @@
-// require
+// require service
 const AccessService = require('../services/access.service');
+
+// require response
+const { CreatedResponse } = require('../core/success.response');
 
 // [POST] /api/v1/shop/signup
 module.exports.signUp = async (req, res) => {
-    res.status(200).json(await AccessService.signUp(req.body));
+    // cách [CHUẨN] 
+    new CreatedResponse({
+        message: 'Tạo Tài Khoản Shop Thành Công',
+        metadata: await AccessService.signUp(req.body)
+    }).send(res);
 
-    // bỏ try catch
+    // cách [2] cách này chưa chuẩn đâu
+    // res.status(200).json(await AccessService.signUp(req.body));
+
+    // cách [1] bỏ try catch
     // try {
     //     // 200 OK
     //     // 201 CREATED
