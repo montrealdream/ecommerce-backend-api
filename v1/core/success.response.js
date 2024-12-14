@@ -13,8 +13,8 @@ const ReasonStatusCode = {
 class SuccessResponse {
     constructor ({ statusCode, reasonStatusCode, message, metadata = {} }) {
         console.log(`[2]::CREATED RESPONSE`);
-        this.status = statusCode;
-        this.message = message ? message : reasonStatusCode;
+        this.status = statusCode ? statusCode : StatusCode.OK;
+        this.message = message ? message : ReasonStatusCode.OK;
         this.metadata = metadata;
     }
 

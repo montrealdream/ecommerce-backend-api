@@ -1,12 +1,22 @@
 @url_dev=http://localhost:3000/api/v1/shop
 
-# đăng ký
+### đăng ký
 POST {{url_dev}}/signup
 Content-Type: application/json
 x-api-key: 2a5dc130dab631d450510bc34c4eb6151faac12f2e22b01e364b7a09d952d8c5e8b46b1d4db3b25ca14b0453379e2e7a86535eb4a7ac439fa232c62cb5fa3709
 
 {
     "name": "Giang Trường Shop",
+    "email": "giangtruong100702@gmail.com",
+    "password": "matkhauSieuManh"
+}
+
+### đăng nhập
+POST {{url_dev}}/login
+Content-Type: application/json
+x-api-key: 2a5dc130dab631d450510bc34c4eb6151faac12f2e22b01e364b7a09d952d8c5e8b46b1d4db3b25ca14b0453379e2e7a86535eb4a7ac439fa232c62cb5fa3709
+
+{
     "email": "giangtruong100702@gmail.com",
     "password": "matkhauSieuManh"
 }

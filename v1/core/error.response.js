@@ -21,7 +21,6 @@ const ReasonStatusCode = {
 class ErrorResponse extends Error {
     // Error => name, message, stack => Kế thừa status và message
     constructor(message, status) {
-        console.log(`[3]::Throw BadRequestError`);
         super(message);
         this.status = status;
     }
@@ -35,12 +34,18 @@ class ConflictRequestError extends  ErrorResponse {
 
 class BadRequestError extends  ErrorResponse {
     constructor(message = ReasonStatusCode.BAD_REQUEST, statusCode = StatusCode.BAD_REQUEST) {
-        console.log(`[2]::Throw BadRequestError`);
         super(message, statusCode)
+    }
+}
+
+class UnAuthorizedRequestError extends ErrorResponse {
+    constructor(message = ReasonStatusCode.UNAUTHORIZED, statusCode = StatusCode.UNAUTHORIZED) {
+        super(message< statusCode)
     }
 }
 
 module.exports = {
     ConflictRequestError,
-    BadRequestError
+    BadRequestError,
+    UnAuthorizedRequestError
 }

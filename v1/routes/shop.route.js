@@ -11,10 +11,10 @@ const router = express.Router();
 const shopController = require('../controllers/shop.controller');
 
 // use
-router.post(
-    '/signup',
-    asyncHandler(shopController.signUp)
-);
+router.post( '/signup', asyncHandler(shopController.signUp) );
+    
+router.post( '/login', asyncHandler(shopController.login) );    
+
 
 // export
 module.exports = router;

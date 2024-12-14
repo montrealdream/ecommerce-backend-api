@@ -2,7 +2,7 @@
 const AccessService = require('../services/access.service');
 
 // require response
-const { CreatedResponse } = require('../core/success.response');
+const { CreatedResponse, SuccessResponse } = require('../core/success.response');
 
 // [POST] /api/v1/shop/signup
 module.exports.signUp = async (req, res) => {
@@ -31,4 +31,12 @@ module.exports.signUp = async (req, res) => {
     //         status: 'error'
     //     });
     // }
+}
+
+// [POST] /api/v1/shop/login
+module.exports.login = async (req, res) => {
+    new SuccessResponse({
+        message: 'Login::OK',
+        metadata: await AccessService.login(req.body)
+    }).send(res);
 }
