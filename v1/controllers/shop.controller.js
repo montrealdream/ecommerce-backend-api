@@ -40,3 +40,11 @@ module.exports.login = async (req, res) => {
         metadata: await AccessService.login(req.body)
     }).send(res);
 }
+
+// [POST] /api/v1/shop/logout
+module.exports.logout = async (req, res) => {
+    new SuccessResponse({
+        messasge: 'Logout::OK',
+        metadata: await AccessService.logout({ keyStore: req.keyStore })
+    }).send(res);
+}

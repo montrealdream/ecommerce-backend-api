@@ -45,6 +45,15 @@ class KeyStoreService {
             return error;
         }
     }
+
+    static findByUserId = async ( { userId } ) => {
+        const keyStore = await KeyStoreModel.findOne({ userId });
+        return keyStore;
+    }
+
+    static removeKeyStoreById = async ( { userId } ) => {
+        return await KeyStoreModel.deleteOne({ userId });
+    }
 }
 
 // export

@@ -2,7 +2,8 @@
 const express = require('express');
 
 // require middlware
-const asyncHandler = require('../middleware/handleError.middleware');
+const asyncHandler = require('../helpers/asyncHandler.helper');
+const authMiddleware = require('../middleware/auth.middleware');
 
 // init router
 const router = express.Router();
@@ -15,6 +16,10 @@ router.post( '/signup', asyncHandler(shopController.signUp) );
     
 router.post( '/login', asyncHandler(shopController.login) );    
 
+// ### middleware authetication ###
+router.use(asyncHandler(authMiddleware.authentication));
+
+router.post('/logout', shopController.logout);
 
 // export
 module.exports = router;

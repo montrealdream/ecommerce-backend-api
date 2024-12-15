@@ -16,7 +16,7 @@ const { getInfoData } = require('../utils/index.utils');
 const generateUtil = require('../utils/generate');
 
 // require response core
-const { BadRequestError, ConflictRequestError, UnAuthorizedRequestError, } = require('../core/error.response');
+const { BadRequestError, ConflictRequestError, AuthorizedRequestError, } = require('../core/error.response');
 
 // các quyền của shop
 const RoleShop = {
@@ -113,7 +113,7 @@ class AccessService {
 
         // Bước 2: Kiểm tra mật khẩu
         const isPassword = bcrypt.compareSync(password, foundShop.password);
-        if(!isPassword) throw new UnAuthorizedRequestError('Shop Authencation Error');
+        if(!isPassword) throw new AuthorizedRequestError('Shop Authencation Error');
 
         // Tạo Access Token và Refresh Token
         if(foundShop && isPassword) {
@@ -134,8 +134,12 @@ class AccessService {
                 shop: getInfoData(foundShop, ['_id', 'name', 'email']),
                 tokens: { accessToken, refreshToken }
             }
-        }
-        
+        }   
+    }
+
+    static logout = async ( { keyStore } ) => {
+        const keyStoreDeleted = await KeyStoreService.removeKeyStoreById({userId: keyStore.userId});
+        return keyStoreDeleted;
     }
 }
 
