@@ -48,3 +48,12 @@ module.exports.logout = async (req, res) => {
         metadata: await AccessService.logout({ keyStore: req.keyStore })
     }).send(res);
 }
+
+// [POST] /api/v1/shop/refreshToken
+module.exports.refreshToken = async (req, res) => {
+    console.log('Into Controller:::');
+    new SuccessResponse({
+        message: 'RefreshToken::OK',
+        metadata: await AccessService.handlerRefreshToken( req.body ) 
+    }).send(res);
+}

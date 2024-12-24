@@ -51,6 +51,25 @@ class KeyStoreService {
         return keyStore;
     }
 
+    static findByRefreshToken = async ( { refreshToken }) => {
+        return await KeyStoreModel.findOne({ refreshToken }).lean();
+    }
+
+    static findByRefreshTokenUsed = async ( { refreshToken } ) => {
+        console.log('[1]RefreshToken:::' + refreshToken);
+        return await  KeyStoreModel.findOne( { usedRefreshToken: refreshToken } );
+    }
+
+    static updateRefreshToken = async ( { userId, refreshToken, usedRefreshToken }) => {
+        return await KeyStoreModel.updateOne( 
+            { userId },
+            {
+                $set: { refreshToken: refreshToken }, // lưu refreshToken mới
+                $addToSet: { usedRefreshToken: usedRefreshToken }
+            }
+        );
+    }
+
     static removeKeyStoreById = async ( { userId } ) => {
         return await KeyStoreModel.deleteOne({ userId });
     }

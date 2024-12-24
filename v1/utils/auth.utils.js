@@ -32,3 +32,10 @@ module.exports.createPairToken = async (payload, publicKey, privateKey) => {
         }
     }
 }
+
+// verify 
+module.exports.verifyToken = async ( { token, keySecret } ) => {
+    const { userId, email } = await JWT.verify( token, keySecret);
+
+    return { userId, email };
+}

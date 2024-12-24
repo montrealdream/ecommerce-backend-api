@@ -16,7 +16,7 @@ const { getInfoData } = require('../utils/index.utils');
 const generateUtil = require('../utils/generate');
 
 // require response core
-const { BadRequestError, ConflictRequestError, AuthorizedRequestError, } = require('../core/error.response');
+const { BadRequestError, ConflictRequestError, AuthorizedRequestError, ForbiddenError} = require('../core/error.response');
 
 // các quyền của shop
 const RoleShop = {
@@ -140,6 +140,48 @@ class AccessService {
     static logout = async ( { keyStore } ) => {
         const keyStoreDeleted = await KeyStoreService.removeKeyStoreById({userId: keyStore.userId});
         return keyStoreDeleted;
+    }
+
+    static handlerRefreshToken = async ( { refreshToken } ) => {
+
+        // tìm xem refresh token đã được sử dụng chưa
+        const usedRefreshToken = await KeyStoreService.findByRefreshTokenUsed({ refreshToken });
+        
+        // nếu refreshToken đã được sử dụng
+        if(usedRefreshToken) {
+            // verify xem là user nào
+            const { userId, email } = await authUtils.verifyToken({ refreshToken, keySecret: usedRefreshToken.publicKey});
+
+            // xóa token trong KeyStore với userId
+            await KeyStoreService.removeKeyStoreById( { userId });
+            
+            throw new ForbiddenError('reLogin');
+        }
+
+        // tìm userId và email theo refreshToken
+        const foundRefreshToken = await KeyStoreService.findByRefreshToken({ refreshToken });
+        if(!foundRefreshToken) throw new AuthorizedRequestError('Tài khoản chưa được đăng ký');
+
+        const { userId, email } = await authUtils.verifyToken( { token: refreshToken, keySecret: foundRefreshToken.publicKey } );
+
+        // tìm email
+        const foundUser = await ShopService.findByEmail( {email} );
+        if(!foundUser) throw AuthorizedRequestError('Tài khoản chưa được đăng ký');
+
+        // tạo cặp token mới
+        const tokens = await authUtils.createPairToken({userId, email}, foundRefreshToken.publicKey, foundRefreshToken.privateKey);
+
+        // cập nhật refreshToken mới và giữ refreshToken cũ lại
+        const docs = await KeyStoreService.updateRefreshToken({ 
+            userId,
+            refreshToken: tokens.refreshToken,
+            usedRefreshToken: refreshToken
+        });
+            
+        return {
+            user: { userId, email },
+            tokens
+        }
     }
 }
 

@@ -21,5 +21,7 @@ router.use(asyncHandler(authMiddleware.authentication));
 
 router.post('/logout', shopController.logout);
 
+router.post('/refreshToken', shopController.refreshToken)
+
 // export
 module.exports = router;
