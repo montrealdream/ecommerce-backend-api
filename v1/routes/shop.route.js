@@ -17,11 +17,11 @@ router.post( '/signup', asyncHandler(shopController.signUp) );
 router.post( '/login', asyncHandler(shopController.login) );    
 
 // ### middleware authetication ###
-router.use(asyncHandler(authMiddleware.authentication));
+router.use(asyncHandler(authMiddleware.auth));
 
-router.post('/logout', shopController.logout);
+router.post('/logout', asyncHandler(shopController.logout));
 
-router.post('/refreshToken', shopController.refreshToken)
+router.post('/refreshToken', asyncHandler(shopController.refreshToken));
 
 // export
 module.exports = router;

@@ -16,28 +16,48 @@ const HEADER = {
     REFRESH_TOKEN: 'x-rtoken-id' 
 }
 
-module.exports.authentication = async (req, res, next) => {
+module.exports.auth = async (req, res, next) => {
     // Bước 1: Kiểm tra UserId
     const userId = req.headers[HEADER.CLIENT_ID];
     if(!userId) throw new AuthorizedRequestError('Invalid Request');
 
-    const keyStore = await KeyStoreService.findByUserId({userId});
+    // Từ userId lấy ra KeyStore
+    const keyStore = await KeyStoreService.findByUserId({ userId });
     if(!keyStore) throw new NotFoundError('Not Found Key Store')
+    
+    // Nếu AccessToken hết hạn thì sẽ nhận được refreshToken
+    const refreshToken = req.headers[HEADER.REFRESH_TOKEN];
+    if(refreshToken) {
+        try {
+            const decode = await JWT.verify(refreshToken, keyStore.publicKey);
 
-    // Bước 2: Kiểm tra Access Token
+            if(userId !== decode.userId) throw new AuthorizedRequestError('Invalid Request');
+            
+            req.user = decode;
+            req.refreshToken = refreshToken;
+            req.keyStore = keyStore;
+            
+            return next();
+        } 
+        catch (error) {
+            
+        }
+    }
+
+    // Kiểm tra Access Token
     const accessToken = req.headers[HEADER.AUTHORIZATION];
     if(!accessToken) throw new AuthorizedRequestError('Invalid Request');
 
     try {
         const publicKey  = keyStore.publicKey;
         const privateKey = keyStore.privateKey;
-        // Bước 3: Verify 
+        // Bước 1: Verify 
         const decodePayload = await JWT.verify(accessToken, publicKey, { algorithm: 'RS256' });
         
-        // Bước 4: Kiểm tra lại userId có hợp lệ không với userId của KeyStore
+        // Bước 2: Kiểm tra lại userId có hợp lệ không với userId của KeyStore
         if(userId !== decodePayload.userId) throw AuthorizedRequestError('Invalid Request');
 
-        // Bước 5 gán KeyStore
+        // Bước 3: Gán KeyStore
         req.keyStore = keyStore;
         return next();
     }

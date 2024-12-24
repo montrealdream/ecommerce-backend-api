@@ -142,6 +142,36 @@ class AccessService {
         return keyStoreDeleted;
     }
 
+    static handlerRefreshTokenV2 = async ( { user, refreshToken, keyStore } ) => {
+        const { userId, email } = user;
+
+        // tìm xem refresh token đã được sử dụng chưa
+        if(keyStore.usedRefreshToken.includes(refreshToken)) {
+            // xóa token trong KeyStore với userId
+            await KeyStoreService.removeKeyStoreById( { userId } );
+
+            throw new ForbiddenError('reLogin');
+        }
+
+        // check phải refreshToken đang sử dụng không
+        if(keyStore.refreshToken !== refreshToken) throw AuthorizedRequestError('Tài khoản chưa được đăng ký');
+
+        // tạo cặp token mới
+        const tokens = await authUtils.createPairToken({ userId, email }, keyStore.publicKey, keyStore.privateKey);
+
+        // cập nhật refreshToken mới và giữ refreshToken cũ lại
+        const docs = await KeyStoreService.updateRefreshToken({ 
+            userId: user.userId,
+            refreshToken: tokens.refreshToken,
+            usedRefreshToken: refreshToken
+        });
+            
+        return {
+            user,
+            tokens
+        }
+    }
+
     static handlerRefreshToken = async ( { refreshToken } ) => {
 
         // tìm xem refresh token đã được sử dụng chưa

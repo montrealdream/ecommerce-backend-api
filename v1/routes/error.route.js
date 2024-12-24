@@ -23,6 +23,7 @@ module.exports = (app) => {
         return res.status(statusCode).json({
             status: 'error',
             code: statusCode,
+            stack: error.stack, // log ra dòng nào lỗi
             message: error.message || ReasonStatusCode.INTERNAL_SERVER_ERROR // Internal Server Error Là Lỗi Server
         })
     });
