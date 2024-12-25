@@ -9,6 +9,9 @@ const COLLECTION_NAME_CLOTHING = 'clothings';
 const DOCUMENT_NAME_ELECTRONIC = 'Eletronic';
 const COLLECTION_NAME_ELECTRONIC = 'electronics';
 
+const DOCUMENT_NAME_FURNITURE = 'Furniture';
+const COLLECTION_NAME_FURNITRUE = 'furnitures';
+
 // Schema chung của sản phẩm
 const productSchema = new mongoose.Schema(
     {
@@ -77,26 +80,27 @@ const electronicSchema = new mongoose.Schema(
 );
 
 // // Sản phẩm type Furnitrue (nội thất) => product_attributes
-// const furnitureSchema = new mongoose.Schema(
-//     {
-//         manufacturer: { type: String, required: true }, // nhà máy sản xuất
-//         model:  String,  
-//         color: String,
-        
-//         // sản phẩm của Shop (Tài khoản)
-//         product_shop: {
-//             type: mongoose.Schema.Types.ObjectId,
-//             ref: 'shops'
-//         }
-//     },
-//     {
-//         timestamps: true
-//     }
-// );
+const furnitureSchema = new mongoose.Schema(
+    {
+        brand: { type: String, required: true }, // thương hiệu
+        size:  String,    // kích cỡ của quần áo
+        material: String, // chất liệu của quần áo
+
+        // sản phẩm của Shop (Tài khoản)
+        product_shop: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'shops'
+        }
+    },
+    {
+        timestamps: true
+    }
+);
 
 //Export the model
 module.exports = {
     Product: mongoose.model(DOCUMENT_NAME_PRODUCT, productSchema, COLLECTION_NAME_PRODUCT),
     Clothing: mongoose.model(DOCUMENT_NAME_CLOTHING, clothingSchema, COLLECTION_NAME_CLOTHING),
     Electronic: mongoose.model(DOCUMENT_NAME_ELECTRONIC, electronicSchema, COLLECTION_NAME_ELECTRONIC),
+    Furniture: mongoose.model(DOCUMENT_NAME_FURNITURE, furnitureSchema, COLLECTION_NAME_FURNITRUE),
 }

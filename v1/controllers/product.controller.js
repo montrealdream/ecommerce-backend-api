@@ -2,7 +2,8 @@
 const { CreatedResponse, SuccessResponse } = require('../core/success.response');
 
 // service
-const ProductService = require('../services/product.service');
+// const ProductService = require('../services/product.service');
+const ProductService = require('../services/product.service.advance');
 
 // [POST] /api/v1/products/create
 module.exports.createProduct = async (req, res, next) => {
