@@ -10,7 +10,7 @@ const DOCUMENT_NAME_ELECTRONIC = 'Eletronic';
 const COLLECTION_NAME_ELECTRONIC = 'electronics';
 
 // Schema chung của sản phẩm
-var productSchema = new mongoose.Schema(
+const productSchema = new mongoose.Schema(
     {
         product_name: { type: String, required: true },
         product_thumb: { type: String, required: true },
@@ -74,7 +74,25 @@ const electronicSchema = new mongoose.Schema(
     {
         timestamps: true
     }
- );
+);
+
+// // Sản phẩm type Furnitrue (nội thất) => product_attributes
+// const furnitureSchema = new mongoose.Schema(
+//     {
+//         manufacturer: { type: String, required: true }, // nhà máy sản xuất
+//         model:  String,  
+//         color: String,
+        
+//         // sản phẩm của Shop (Tài khoản)
+//         product_shop: {
+//             type: mongoose.Schema.Types.ObjectId,
+//             ref: 'shops'
+//         }
+//     },
+//     {
+//         timestamps: true
+//     }
+// );
 
 //Export the model
 module.exports = {

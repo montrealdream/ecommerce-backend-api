@@ -1,5 +1,6 @@
 // require router
 const shopRouter = require('./shop.route');
+const productRouter = require('./product.route');
 
 // require middleware
 const apiKeyMiddleware = require('../middleware/apiKey.middleware');
@@ -15,4 +16,6 @@ module.exports = (app) => {
 
     // Route
     app.use(version + `/shop`, shopRouter);
+
+    app.use(version + `/products`, productRouter);
 }

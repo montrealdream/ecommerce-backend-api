@@ -58,6 +58,7 @@ module.exports.auth = async (req, res, next) => {
         if(userId !== decodePayload.userId) throw AuthorizedRequestError('Invalid Request');
 
         // Bước 3: Gán KeyStore
+        req.user = decodePayload;
         req.keyStore = keyStore;
         return next();
     }
