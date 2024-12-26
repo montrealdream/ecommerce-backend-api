@@ -18,5 +18,8 @@ router.use(asyncHandler(authMiddleware.auth));
 
 router.post('/create', asyncHandler(productController.createProduct));
 
+// ### QUERY ###
+router.get('/drafts/all', asyncHandler(productController.getAllDraftForShop));
+
 // export
 module.exports = router;

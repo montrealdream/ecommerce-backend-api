@@ -1,8 +1,16 @@
 // model
 const { Product, Clothing, Electronic, Furniture } = require('../models/product.model');
 
+// repositories in model
+const ProductRepository = require('../models/repositories/product.repo');
+
 // core
 const { BadRequestError } = require('../core/error.response');
+
+
+
+// package
+const slugify = require('slugify');
 
 // định nghĩa Class Product
 class ProductClass {
@@ -96,17 +104,25 @@ class FurnitureClass extends ProductClass {
 // sử dụng simple factory pattern
 class ProductFactory {
 
-    static productRegisty = {}; // key - class
+    static productRegisty = {}; // key - class => sử dụng như là Strategy Pattern
 
+    // đăng ký một class mới
     static registerProductType (type, classRef) {
         ProductFactory.productRegisty[type] = classRef
     }
 
+    // tạo mới sản phẩm
     static async createProduct (type, payload) {
         const productClass = ProductFactory.productRegisty[type];
         if(!productClass) throw new BadRequestError('no no no');
 
         return new productClass( payload ).createProduct();
+    }
+
+    // Lấy toàn bộ danh sách nháp
+    static findAllDraftForShop = async ({ product_shop, limit = 50, skip = 0 }) => {
+        const query = { product_shop, isDraft: true }; // lấy những bản nháp
+        return await ProductRepository.findAllDraftForShop({query, limit, skip});
     }
 }
 

@@ -1,3 +1,5 @@
+// package
+const slugify = require('slugify');
 const mongoose = require('mongoose');
 
 const DOCUMENT_NAME_PRODUCT = 'Product';
@@ -20,6 +22,7 @@ const productSchema = new mongoose.Schema(
         product_description: { type: String },
         product_price: { type: Number, required: true },
         product_quantity: { type: Number, required: true },
+        product_slug: { type: String }, // quan-jean
 
         // thuộc tính của sản phẩm ví dụ quần áo thì thuộc tính khác, đồ điện tử thì thuộc tính khác
         product_attributes: { 
@@ -37,10 +40,36 @@ const productSchema = new mongoose.Schema(
         // sản phẩm của Shop (Tài khoản)
         product_shop: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'shops'
-        }
+            ref: 'Shop' // ref from Document Name
+        },
+
+        // rating sản phẩm
+        product_rating: {
+            type: Number,
+            min: [1, 'Rating phải ít nhất là 1.0'],
+            max: [5, 'Rating phải cao nhất là 5.0'],
+
+            // làm tròn giá trị rating
+            set: ( val ) => Math.round(value * 10) / 10
+        },
+
+        // ví dụ Iphone có màu gì, trong màu đó có bao nhiêu Gb
+        product_variations: { type: Array, default: [] },
+
+        // isDraft khi tạo ra nó sẽ là bản nháp, không select ra nên không cần tiền tố product_
+        // đánh index vì nó được sử dụng nhiều nhất
+        // select: false để khi select ra thì không lấy trường này ra
+        isDraft: { type: Boolean, default: true, index: true, select: false }, 
+        isPublished: { type: Boolean, default: false, index: true, select: false }, 
     }
 );
+
+// middleware document => run hàm này trước khi .save() hoặc create() một bản ghi 
+// pre-hooks
+productSchema.pre('save', function ( next ) {
+    this.product_slug = slugify(this.product_name, { lower: true });
+    next(); 
+});
 
 // Sản phẩm type Clothing (quần áo) => product_attributes
 const clothingSchema = new mongoose.Schema(

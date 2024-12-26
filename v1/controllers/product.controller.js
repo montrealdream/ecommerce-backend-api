@@ -18,3 +18,21 @@ module.exports.createProduct = async (req, res, next) => {
         )
     }).send(res);
 }
+
+// [GET] /api/v1/products/drafts/all
+/**
+ * @description Lấy toàn bộ bản nháp sản phẩm của Shop
+ * @param { Number } limit 
+ * @param { Number } skip 
+ * @return { JSON }
+ */
+module.exports.getAllDraftForShop = async (req, res, next) => {
+    new SuccessResponse({
+        message: "Lấy những bản nháp của sản phẩm",
+        metadata: await ProductService.findAllDraftForShop(
+            {
+                product_shop: req.user.userId // req.user lấy từ authentication-v2
+            }
+        )
+    }).send(res);
+}
