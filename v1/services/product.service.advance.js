@@ -106,12 +106,12 @@ class ProductFactory {
 
     static productRegisty = {}; // key - class => sử dụng như là Strategy Pattern
 
-    // đăng ký một class mới
+    // Đăng ký một class mới
     static registerProductType (type, classRef) {
         ProductFactory.productRegisty[type] = classRef
     }
 
-    // tạo mới sản phẩm
+    // Tạo mới sản phẩm
     static async createProduct (type, payload) {
         const productClass = ProductFactory.productRegisty[type];
         if(!productClass) throw new BadRequestError('no no no');
@@ -124,6 +124,20 @@ class ProductFactory {
         const query = { product_shop, isDraft: true }; // lấy những bản nháp
         return await ProductRepository.findAllDraftForShop({query, limit, skip});
     }
+
+    // Lấy toàn bộ danh sách đã publish (isPublished: true)
+    static findAllPublishForShop = async ({ product_shop, limit = 50, skip = 0 }) => {
+        const query = { product_shop, isDraft: true }; // lấy những bản nháp
+        return await ProductRepository.findAllPublishForShop({query, limit, skip});
+    }
+    
+    // Publish một bản nháp
+    static publishProductByShop = async ({product_id, product_shop}) => {
+        // product_id: để biết sản phẩm nào
+        // product_shop: tức id của shop để biết đúng sản phẩm của tài khoản shop cần publish
+        return await ProductRepository.publishProductByShop({ product_id, product_shop });
+    }
+
 }
 
 // đăng ký các class

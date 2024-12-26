@@ -36,3 +36,18 @@ module.exports.getAllDraftForShop = async (req, res, next) => {
         )
     }).send(res);
 }
+
+// [GET] /api/v1/products/isPublish/:id
+module.exports.isPublishProduct = async (req, res, next) => {
+    const product_id = req.params.id;
+
+    new SuccessResponse({
+        message: "Publish Sản phẩm",
+        metadata: await ProductService.publishProductByShop(
+            {
+                product_id,
+                product_shop: req.user.userId // req.user lấy từ authentication-v2
+            }
+        )
+    }).send(res);
+}

@@ -18,6 +18,9 @@ router.use(asyncHandler(authMiddleware.auth));
 
 router.post('/create', asyncHandler(productController.createProduct));
 
+
+router.post('/isPublish/:id', asyncHandler(productController.isPublishProduct));
+
 // ### QUERY ###
 router.get('/drafts/all', asyncHandler(productController.getAllDraftForShop));
 
