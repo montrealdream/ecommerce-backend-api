@@ -15,7 +15,8 @@ module.exports = (app) => {
     app.use(apiKeyMiddleware.requiredPermission('0000'));
 
     // Route
-    app.use(version + `/shop`, shopRouter);
 
     app.use(version + `/products`, productRouter);
+
+    app.use(version + `/shop`, shopRouter);
 }

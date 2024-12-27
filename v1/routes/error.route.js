@@ -9,16 +9,16 @@ const ReasonStatusCode = {
 }
 
 module.exports = (app) => {
+    
+    // middleware này sẽ nhận các lỗi từ router (tức chưa vào controller hay middleware) mà sẽ không detect được cái router
     app.use( (req, res, next) => {
         const error = new Error('Not Found');
         error.status = 404;
-        console.log(`[5]::Throw BadRequestError ${error}`);
         next(error);
     })
     
+    // router nãy sẽ nhận các lỗi được ném (throw new ...) từ middleware hay controller ra
     app.use( (error, req, res, next) => {
-        console.log(`[6]::Throw BadRequestError ${error}`);
-
         const statusCode = error.status || StatusCode.INTERNAL_SERVER_ERROR; // 500 Lỗi server
         return res.status(statusCode).json({
             status: 'error',

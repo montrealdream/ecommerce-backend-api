@@ -1,0 +1,18 @@
+@url_dev=http://localhost:3000/api/v1/products
+
+### Update một sản phẩm
+PATCH {{url_dev}}/update/676e2f29ac03c89f6a934496
+Content-Type: application/json
+x-api-key: 106b78f9ffe2a70ea6c39072b14af60a16742ebf5dd426a9b03ab8d90775748220e15a7e0c33498ced67cbf1f10e552c16e22c70a2d08e431a8b55e68ed8a75f
+x-client-id: 676ab54ce8d726e64be6d910
+authorization: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzZhYjU0Y2U4ZDcyNmU2NGJlNmQ5MTAiLCJlbWFpbCI6ImdpYW5ndHJ1b25nMTAwNzAyQGdtYWlsLmNvbSIsImlhdCI6MTczNTI3NTI0NywiZXhwIjoxNzM1NDQ4MDQ3fQ.k4SRRpRZByFmvJ98C2pVEvOKn9IoaCxeANSZPvd0SVsFDYRgHROq3TfKCs9Ij62FzNhkLrbeSe2OVsgllwqHPEdnVX9e7C5xnS4sMHo-0pD7qmbfCHu0yXltOp-LTrFDoxQrU9_cxHzi59xtq5wAuAx1gnACgPJwJ-kZtEZoAYuXazqcZcFZJ5NW2ABeAURYcvzpzRGanUfQWN9fYOkfrx5IlEZPHwK4g2TR3fCH_Ed-t_vbp9T-AzmP9vJ--8S4liAOnHBo-vXRBIZ8pX4Pl0q57Crjw673EqTWbpBHP1ahIsQhwOUElTFrqL-YOkAJk2Ry8tN247Uwed7cxFLNgn6MnkkKfGxMelGcvUHmKIDIKfqqBTT0eU_aOPKfmZuXAClQY_nTzCLnKxkXhpWhxmHHGUFcJkNABeAERtv4TkMqG94qL3jsXOvbh8BXC7H_eWcybTsPjA6zYKaQkd6D_4phUHXYEd3gCg0wwMAMSmgZ9j-3vkgPxENaMqfWhGxMQOXx-ZUbZamS5l8Jdp_CkYopcyeLnl6WwEC7hgmq1jo6kCPia54xBTakZ1kd2jbpZOU1fmRLim99izoLzQatVH6PlVaQV6pk19Y8SjlhrfwhW8O_GMa9fCMbAvW0xiEHcS6WSeGT7QtVGOb9rTKEyHdgEbIksa1QX6OVIbrN5oE
+
+{
+    "product_attributes": {
+        "brand": "Áo Thái"
+    },
+    "product_name": "Áo Vịt Pro",
+    "product_price": 20,
+    "product_type": "Clothing"
+}
+

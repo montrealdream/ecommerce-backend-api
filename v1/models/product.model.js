@@ -64,6 +64,13 @@ const productSchema = new mongoose.Schema(
     }
 );
 
+// đánh index để tìm kiếm
+productSchema.index({
+    product_name: 'text',
+    product_description: 'text'
+});
+
+
 // middleware document => run hàm này trước khi .save() hoặc create() một bản ghi 
 // pre-hooks
 productSchema.pre('save', function ( next ) {

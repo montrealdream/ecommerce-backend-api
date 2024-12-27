@@ -34,6 +34,7 @@ class ConflictRequestError extends  ErrorResponse {
 
 class BadRequestError extends  ErrorResponse {
     constructor(message = ReasonStatusCode.BAD_REQUEST, statusCode = StatusCode.BAD_REQUEST) {
+        console.log('[1]::: LỖI RỒI TRƯỜNG ƠI !!!')
         super(message, statusCode)
     }
 }
