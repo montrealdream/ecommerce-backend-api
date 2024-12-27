@@ -4,6 +4,8 @@ const { Product, Clothing, Electronic } = require('../models/product.model');
 // core
 const { BadRequestError } = require('../core/error.response');
 
+
+
 // định nghĩa Class Product
 class ProductClass {
 
@@ -25,10 +27,23 @@ class ProductClass {
     // tạo sản phẩm mới
     // createProduct = async () => await Product.create(this);
     async createProduct (product_id) {
-        return await Product.create({
+        const newProduct  = await Product.create({
             ...this,
             _id: product_id // id của bản ghi  này chính là id của cái attribute cụ thể được tạo ví dụ _id của Clothing hay _id của Electronics
         });
+
+        // add số lượng sản phẩm (product_quantity) vào inventory collection
+        if( newProduct ) {
+            const ins = await InventoryRepo.insertInventory({
+                productId: newProduct._id,
+                shopId: this.product_shop,
+                stock: this.product_quantity
+            });
+
+            console.log(ins);
+        }
+        //  "message": "invalid signature" lỗi sai accessToken
+        return newProduct;
     }
 }
 

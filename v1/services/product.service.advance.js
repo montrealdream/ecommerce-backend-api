@@ -3,6 +3,7 @@ const { Product, Clothing, Electronic, Furniture } = require('../models/product.
 
 // repositories in model
 const ProductRepository = require('../models/repositories/product.repo');
+const InventoryRepo = require('../models/repositories/inventory.repo');
 
 // core
 const { BadRequestError } = require('../core/error.response');
@@ -34,10 +35,21 @@ class ProductClass {
     // tạo sản phẩm mới
     // createProduct = async () => await Product.create(this);
     async createProduct (product_id) {
-        return await Product.create({
+        const newProduct  = await Product.create({
             ...this,
             _id: product_id // id của bản ghi  này chính là id của cái attribute cụ thể được tạo ví dụ _id của Clothing hay _id của Electronics
         });
+
+        // add số lượng sản phẩm (product_quantity) vào inventory collection
+        if( newProduct ) {
+            await InventoryRepo.insertInventory({
+                productId: newProduct._id,
+                shopId: this.product_shop,
+                stock: this.product_quantity
+            });
+        }
+        //  "message": "invalid signature" lỗi sai accessToken
+        return newProduct;
     }
 
     async updateProduct ( productId, payloadUpdate  ) {
