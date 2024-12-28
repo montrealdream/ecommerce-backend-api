@@ -1,6 +1,6 @@
-@url_dev=http://localhost:3000/api/v1/products
+@url_dev=http://localhost:3000/api/v1/discount
 
-### Tạo mới sản phẩm
+### Tạo mới mã Discount
 POST {{url_dev}}/create
 Content-Type: application/json
 x-api-key: 106b78f9ffe2a70ea6c39072b14af60a16742ebf5dd426a9b03ab8d90775748220e15a7e0c33498ced67cbf1f10e552c16e22c70a2d08e431a8b55e68ed8a75f
@@ -8,29 +8,39 @@ x-client-id: 676ab54ce8d726e64be6d910
 authorization: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzZhYjU0Y2U4ZDcyNmU2NGJlNmQ5MTAiLCJlbWFpbCI6ImdpYW5ndHJ1b25nMTAwNzAyQGdtYWlsLmNvbSIsImlhdCI6MTczNTI3NTI0NywiZXhwIjoxNzM1NDQ4MDQ3fQ.k4SRRpRZByFmvJ98C2pVEvOKn9IoaCxeANSZPvd0SVsFDYRgHROq3TfKCs9Ij62FzNhkLrbeSe2OVsgllwqHPEdnVX9e7C5xnS4sMHo-0pD7qmbfCHu0yXltOp-LTrFDoxQrU9_cxHzi59xtq5wAuAx1gnACgPJwJ-kZtEZoAYuXazqcZcFZJ5NW2ABeAURYcvzpzRGanUfQWN9fYOkfrx5IlEZPHwK4g2TR3fCH_Ed-t_vbp9T-AzmP9vJ--8S4liAOnHBo-vXRBIZ8pX4Pl0q57Crjw673EqTWbpBHP1ahIsQhwOUElTFrqL-YOkAJk2Ry8tN247Uwed7cxFLNgn6MnkkKfGxMelGcvUHmKIDIKfqqBTT0eU_aOPKfmZuXAClQY_nTzCLnKxkXhpWhxmHHGUFcJkNABeAERtv4TkMqG94qL3jsXOvbh8BXC7H_eWcybTsPjA6zYKaQkd6D_4phUHXYEd3gCg0wwMAMSmgZ9j-3vkgPxENaMqfWhGxMQOXx-ZUbZamS5l8Jdp_CkYopcyeLnl6WwEC7hgmq1jo6kCPia54xBTakZ1kd2jbpZOU1fmRLim99izoLzQatVH6PlVaQV6pk19Y8SjlhrfwhW8O_GMa9fCMbAvW0xiEHcS6WSeGT7QtVGOb9rTKEyHdgEbIksa1QX6OVIbrN5oE
 
 {
-    "product_name": "Áo Khoác Hehe",
-    "product_description": "High-quality denim jeans",
-    "product_price": 50,
-    "product_shop": "676ab54ce8d726e64be6d910",
-    "product_type": "Clothing",
-    "product_thumb": "product_thumb",
-    "product_quantity": 5,
-    "product_attributes" : {
-        "brand": "Vile",
-        "size": "L",
-        "material": "NimDe"
-    }
+    "discount_code": "SHOP-1122",  
+    "discount_startAt": "2024-12-29 09:00:00",
+    "discount_endAt":   "2025-03-20 09:00:00",    
+    "discount_isActive": true,  
+    "discount_shopId": "676ab54ce8d726e64be6d910",    
+    "discount_min_order_value": 5,   
+    "discount_list_productId": ["676d3d1768df1a766298631c", "676ed07851396cc33e0d5232"],    
+    "discount_applies_to":  "specific" ,       
+
+    "discount_name": "ĐẶC BIỆT",              
+    "discount_description": "Ngày đặc biệt",     
+    "discount_type": "percentage",             
+    "discount_value": 100,             
+    "discount_max_use": 100,          
+    "discount_user_used": [],     
+    "discount_max_use_per_user": 1,
+    "discount_user_count": 1
 }
 
-### Publish một sản phẩm
-POST {{url_dev}}/isPublish/676ed07851396cc33e0d5232
+### Amount 
+POST {{url_dev}}/amount
+Content-Type: application/json
 x-api-key: 106b78f9ffe2a70ea6c39072b14af60a16742ebf5dd426a9b03ab8d90775748220e15a7e0c33498ced67cbf1f10e552c16e22c70a2d08e431a8b55e68ed8a75f
 x-client-id: 676ab54ce8d726e64be6d910
 authorization: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzZhYjU0Y2U4ZDcyNmU2NGJlNmQ5MTAiLCJlbWFpbCI6ImdpYW5ndHJ1b25nMTAwNzAyQGdtYWlsLmNvbSIsImlhdCI6MTczNTI3NTI0NywiZXhwIjoxNzM1NDQ4MDQ3fQ.k4SRRpRZByFmvJ98C2pVEvOKn9IoaCxeANSZPvd0SVsFDYRgHROq3TfKCs9Ij62FzNhkLrbeSe2OVsgllwqHPEdnVX9e7C5xnS4sMHo-0pD7qmbfCHu0yXltOp-LTrFDoxQrU9_cxHzi59xtq5wAuAx1gnACgPJwJ-kZtEZoAYuXazqcZcFZJ5NW2ABeAURYcvzpzRGanUfQWN9fYOkfrx5IlEZPHwK4g2TR3fCH_Ed-t_vbp9T-AzmP9vJ--8S4liAOnHBo-vXRBIZ8pX4Pl0q57Crjw673EqTWbpBHP1ahIsQhwOUElTFrqL-YOkAJk2Ry8tN247Uwed7cxFLNgn6MnkkKfGxMelGcvUHmKIDIKfqqBTT0eU_aOPKfmZuXAClQY_nTzCLnKxkXhpWhxmHHGUFcJkNABeAERtv4TkMqG94qL3jsXOvbh8BXC7H_eWcybTsPjA6zYKaQkd6D_4phUHXYEd3gCg0wwMAMSmgZ9j-3vkgPxENaMqfWhGxMQOXx-ZUbZamS5l8Jdp_CkYopcyeLnl6WwEC7hgmq1jo6kCPia54xBTakZ1kd2jbpZOU1fmRLim99izoLzQatVH6PlVaQV6pk19Y8SjlhrfwhW8O_GMa9fCMbAvW0xiEHcS6WSeGT7QtVGOb9rTKEyHdgEbIksa1QX6OVIbrN5oE
 
-
-### UnPublish một sản phẩm
-POST {{url_dev}}/isUnPublish/676d3d1768df1a766298631c
-x-api-key: 106b78f9ffe2a70ea6c39072b14af60a16742ebf5dd426a9b03ab8d90775748220e15a7e0c33498ced67cbf1f10e552c16e22c70a2d08e431a8b55e68ed8a75f
-x-client-id: 676ab54ce8d726e64be6d910
-authorization: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzZhYjU0Y2U4ZDcyNmU2NGJlNmQ5MTAiLCJlbWFpbCI6ImdpYW5ndHJ1b25nMTAwNzAyQGdtYWlsLmNvbSIsImlhdCI6MTczNTEwMjM5NywiZXhwIjoxNzM1Mjc1MTk3fQ.KqZoKW1AKF8ZAOye1oeFg1RXcli1YBFee5v0woF2I6EdrkXcYVxC2iDtkA43E0NKaO2dym8LEXAvYiRCjW6VFRh2cf5Bh2L1luI1FzuYrt3zqI6LgMMht2cJNfv0K1D40GMu_mkw4JregNT0eL5TDJD9_9Acouz4mc1GhNKyAFdusZWBSR9-3_6BuC1Yfs-4zgBiu71y9m0uwcZgh4UnSbpgHr-Y-nh5cnS14zccfsJpt4rYlamFo-468dczrXxki1r38IGz76XAJ8_BWFBBRqjnlkoxhHywKjfRJSUbn8Dxo5Z1h-JBUQTGjlLIRsdO5uckHDpDz6swAxMlqqBToyenDqBKjDkneHk8-rI0bv8t5ZzpKd9chSIpNvpk7hMEcm1ojxOlWMKmnImyCivHJT5VFriQWGMwR17WjkRC_X1y0nts2t6fAlX03xMbvsF_xO6uolCQjfjl16cfdvev1t1STVZD9zNvs0N2ujxjj7y5dpqPrxIAffqFZCWDXx7qjAUMX2L3QUFYNo7OD2B0Tr7b-o3V886VsNMUEhX90w7aGeMAfosnuTb86RUsp4Fnnl-mu20P7iwB5HXHP5UqikRDvNgwZsASrh8wkpQWL-w-vuqEz1IFwCgu7Les2HmvX3Zn2uUYsCfmeyZEkDpUOcj-NYBI69-NXShKQSosC4Y
+{
+    "codeId": "SHOP-1122" ,
+    "userId": "",
+    "shopId": "676ab54ce8d726e64be6d910",
+    "products": [{
+        "productId" : "676ed07851396cc33e0d5232",
+        "quantity": 5,
+        "price": 15
+    }]
+}

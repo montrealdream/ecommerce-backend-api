@@ -38,7 +38,6 @@ module.exports.getAllDraftForShop = async (req, res, next) => {
     }).send(res);
 }
 
-
 // [GET] /api/v1/products/published/all
 /**
  * @description Lấy toàn bộ bản đã publish sản phẩm của Shop

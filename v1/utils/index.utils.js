@@ -1,5 +1,8 @@
+// package
 const _ = require('lodash');
+const { Types } = require('mongoose');
 
+// giúp lấy các filed từ một object
 module.exports.getInfoData = (object = {}, field = []) => {
     return _.pick(object, field);
 }
@@ -8,7 +11,6 @@ module.exports.getInfoData = (object = {}, field = []) => {
 module.exports.getSelectData = ( select = [] ) => {
     return Object.fromEntries(select.map( item => [item, 1]));
 }
-
 
 // ['a', 'b'] => {'a': 0, 'b': 0} => không lấy thì truyền dô 0 là ngon
 module.exports.unGetSelectData = ( select = [] ) => {
@@ -62,3 +64,8 @@ module.exports.updateNestedObjParse = ( obj = {} ) => {
 // Object.keys giúp chuyển từ Object {} => một Array [] => giá trị là các key (khóa)
 // Object.fromEntries giúp chuyển từ một Array [] => một Object {}
 // Object.entries giúp chuyển từ một Object {} => một Array [] => các cặp key - value
+
+// convert từ dạng String => ObjectId của mongoDB
+module.exports.convertToObjectIdMongoDb = (id) => {
+    return new Types.ObjectId(id);
+}
