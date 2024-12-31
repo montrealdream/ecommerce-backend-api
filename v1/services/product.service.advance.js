@@ -213,7 +213,7 @@ class ProductFactory {
     static findAllProduct = async ({ limit = 50, sort = 'ctime', page = 1, filter = { isPublished: true } }) => {
         console.log(`limit::${limit}`);
         return await ProductRepository.findAllProduct({limit, sort, filter, page,
-            select: ['product_name', 'product_price', 'product_thumb'] // select bên này là một array
+            select: ['product_name', 'product_price', 'product_thumb', 'product_shop'] // select bên này là một array
         })
     }
 

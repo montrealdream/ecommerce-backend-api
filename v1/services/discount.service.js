@@ -269,6 +269,8 @@ class DiscountService {
         if(discount_type === 'fixed_amount') amount = discount_value;
         else if(discount_type === 'percentage') amount = totalOrder * (discount_value / 100);
         
+        // discount_applies_to filed này chính là xác nhận coupon này có áp dụng cho hết toàn một sản phẩm hay từng sản phẩm.
+        
         return {
             totalOrder,
             amount, // discount được giảm giá bao nhiêu (đã được tính)

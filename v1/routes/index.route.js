@@ -2,6 +2,7 @@
 const shopRouter = require('./shop.route');
 const productRouter = require('./product.route');
 const discountRouter = require('./discount.route');
+const cartRouter = require('./cart.route');
 
 // require middleware
 const apiKeyMiddleware = require('../middleware/apiKey.middleware');
@@ -16,6 +17,7 @@ module.exports = (app) => {
     app.use(apiKeyMiddleware.requiredPermission('0000'));
 
     // Route
+    app.use(version + `/cart`, cartRouter);
 
     app.use(version + `/products`, productRouter);
 

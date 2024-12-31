@@ -117,6 +117,11 @@ module.exports.updateProductById = async ({
 } 
 
 
+// lấy sản phẩm theo id
+module.exports.getProductById = async ({ productId }) => {
+    return await Product.findOne({_id: indexUtil.convertToObjectIdMongoDb(productId)}).lean();
+}
+
 const queryProduct = async ({ query, limit, skip }) => {
     return await Product.find(query)
                         .populate('product_shop', 'name email -_id') // populate sẽ vào db ref mà lấy ra thông tin 
@@ -126,3 +131,4 @@ const queryProduct = async ({ query, limit, skip }) => {
                         .lean()
                         // .exec() // có hay không cũng được => đại diện cho Promise trong mongoose
 }
+
