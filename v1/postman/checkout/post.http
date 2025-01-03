@@ -1,0 +1,31 @@
+@url_dev=http://localhost:3000/api/v1/checkout
+
+### Review Đơn Hàng
+POST {{url_dev}}/review
+Content-Type: application/json
+x-api-key: 106b78f9ffe2a70ea6c39072b14af60a16742ebf5dd426a9b03ab8d90775748220e15a7e0c33498ced67cbf1f10e552c16e22c70a2d08e431a8b55e68ed8a75f
+x-client-id: 676ab54ce8d726e64be6d910
+authorization:eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzZhYjU0Y2U4ZDcyNmU2NGJlNmQ5MTAiLCJlbWFpbCI6ImdpYW5ndHJ1b25nMTAwNzAyQGdtYWlsLmNvbSIsImlhdCI6MTczNTg4NzY2OCwiZXhwIjoxNzM2MDYwNDY4fQ.Xuv2SYdr3TB6m-9BcOihxeM_Jd63bP5g1ntWHZ49VFZbZZeL3vMsmttypXMFgiXbVJGVXGraL1irvCIVkm_kdK9XtQynvX9njcyD7rnyze-xTWf6_TAYY4pFr9sOADvxKOJQb1HfpMg8FXKiiRRum-IhoXQFO7SJkY5fTGv7wui15zCqzt-MiUUT1f2YlkeGJvSzN-gUBlzEl3b_0Pgbol7DtCykivOuEvtIdoRCneaJDEdzeNmXnELdrIO3rmFA44njy8ej8Orbj4h4SsoHTlXt15FOj5emUZ05eXSYdJILWDZtBJRiFmH8qWJPJQBkPFCt12SMioH-4L_6uHaZPJKu-A-2AvKKVCII8LrJ_VXXT6v4WEQYrUukskZkmWN4aExe9EQeHHk0R9H7GKDf21WWvMaM65FT2uGFAyfshzYlV5KaF1jT8d9Lv5yV50rc5G48vqWeYE2J0Bl8QBj1QRCybeJal35kFuABarj37V4bOz_Hcc072HfxUZnWzBCd06eXQOyq6xHPBMLRB4aIvWVpMQ-dkPCMr_10eD8guqVaxHSdXHgUSYeujMIa_JQnsfrMkHzRn4ERr3F3dap-UESAAWkQR958HqLP5fGOmC_p2-8Drl7eC1x8Jxn0LQCgdic_vhMWzbUSrggQEVEagwnRBYy6me37Djxu4FC3eOU
+
+{   
+    "cartId": "67739e44f0025ba12dd7fbe6",
+    "userId":1007,
+    "shop_order_ids": [
+        {
+            "shopId": "67778a9475c717ad67cab223",
+            "shop_discounts": [
+                {   
+                    "shopId": "67778a9475c717ad67cab223",
+                    "codeId": "TNTN-1911"
+                }
+            ],
+            "item_products": [
+                {
+                    "productId": "67778bca75c717ad67cab243",
+                    "price": 100000,
+                    "quantity": 1
+                }
+            ]
+        }
+    ]
+}

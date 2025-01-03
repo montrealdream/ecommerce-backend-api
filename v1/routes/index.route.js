@@ -2,6 +2,7 @@
 const shopRouter = require('./shop.route');
 const productRouter = require('./product.route');
 const discountRouter = require('./discount.route');
+const checkoutRouter = require('./checkout.route');
 const cartRouter = require('./cart.route');
 
 // require middleware
@@ -24,4 +25,6 @@ module.exports = (app) => {
     app.use(version + `/shop`, shopRouter);
 
     app.use(version + `/discount`, discountRouter);
+
+    app.use(version + `/checkout`, checkoutRouter);
 }

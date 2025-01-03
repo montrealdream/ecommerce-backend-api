@@ -6,8 +6,8 @@ Content-Type: application/json
 x-api-key: 106b78f9ffe2a70ea6c39072b14af60a16742ebf5dd426a9b03ab8d90775748220e15a7e0c33498ced67cbf1f10e552c16e22c70a2d08e431a8b55e68ed8a75f
 
 {
-    "name": "Giang Trường Shop",
-    "email": "giangtruong100702@gmail.com",
+    "name": "Thanh Ngân Shop",
+    "email": "thanhngan191102@gmail.com",
     "password": "matkhauSieuManh"
 }
 

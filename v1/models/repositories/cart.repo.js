@@ -29,3 +29,11 @@ module.exports.updateQuantityItemInCart = async ({ userId, product }) => {
 
     return await CartModel.findOneAndUpdate(filter, update, option);
 }
+
+// tìm giỏ hàng bằng cartId
+module.exports.findCartById = async ({ cartId }) => {
+    return await CartModel.findOne({
+        _id: cartId,
+        cart_status: 'active'
+    }).lean();
+}

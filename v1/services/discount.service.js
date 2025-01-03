@@ -273,7 +273,7 @@ class DiscountService {
         
         return {
             totalOrder,
-            amount, // discount được giảm giá bao nhiêu (đã được tính)
+            discount: amount, // discount được giảm giá bao nhiêu (đã được tính)
             totalPrice: totalOrder - amount // tổng tiền
         }
             

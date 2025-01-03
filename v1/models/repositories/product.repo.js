@@ -116,10 +116,25 @@ module.exports.updateProductById = async ({
     )
 } 
 
-
 // lấy sản phẩm theo id
 module.exports.getProductById = async ({ productId }) => {
     return await Product.findOne({_id: indexUtil.convertToObjectIdMongoDb(productId)}).lean();
+}
+
+// kiểm tra xem sản phẩm trên server có hợp lệ hem 
+module.exports.checkProductByServer = async ({ products }) => {
+    // console.log('request before promise all::', request);
+
+    return await Promise.all( products.map(async product => {
+        const foundProduct = await this.getProductById({ productId: product.productId})
+
+            if(foundProduct) return {
+                price: foundProduct.product_price,
+                quantity: product.quantity,
+                productId: product.productId,
+            }
+        })
+    )
 }
 
 const queryProduct = async ({ query, limit, skip }) => {
